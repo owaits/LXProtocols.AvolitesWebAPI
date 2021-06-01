@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31320.298
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LXProtocols.AvolitesWebAPI", "LXProtocols.AvolitesWebAPI\LXProtocols.AvolitesWebAPI.csproj", "{843B0721-7C4F-4048-AAAC-5E8B96FEF300}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LXProtocols.AvolitesWebAPI.Blazor", "LXProtocols.AvolitesWebAPI.Blazor\LXProtocols.AvolitesWebAPI.Blazor.csproj", "{C73182DD-B09E-48C4-9A27-1E7246584358}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{890F9169-ADE7-4169-A403-5DE4A5DFFFED}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{843B0721-7C4F-4048-AAAC-5E8B96FEF300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{843B0721-7C4F-4048-AAAC-5E8B96FEF300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{843B0721-7C4F-4048-AAAC-5E8B96FEF300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{843B0721-7C4F-4048-AAAC-5E8B96FEF300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C73182DD-B09E-48C4-9A27-1E7246584358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C73182DD-B09E-48C4-9A27-1E7246584358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C73182DD-B09E-48C4-9A27-1E7246584358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C73182DD-B09E-48C4-9A27-1E7246584358}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D75B3832-8AC9-44C7-99F9-593399FC6706}
+	EndGlobalSection
+EndGlobal
