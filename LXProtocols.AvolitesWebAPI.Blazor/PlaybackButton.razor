@@ -1,1 +1,1 @@
-﻿<button class="btn btn-primary @(IsActive() ? "active" : "")" style="@BackgroundImageCSS()" @onclick="@(async ()=> await Fire())">@DisplayLegend()</button>
+﻿<button class="btn @(IsActive() ? "btn-primary active" : "btn-outline-primary")" style="@BackgroundImageCSS()" @onclick="@(async ()=> await Fire())">@DisplayLegend()</button>
