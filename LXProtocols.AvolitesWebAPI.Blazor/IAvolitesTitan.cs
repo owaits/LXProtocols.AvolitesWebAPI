@@ -20,7 +20,7 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
         /// <summary>
         /// Gets or sets the console IP address or name to use to connect to the console.
         /// </summary>
-        public string ConsoleAddress { get; set; }
+        public string ConsoleAddress { get; }
 
         /// <summary>
         /// Gets or sets the HTTP port to use when connection to the console, the default is 4430.
@@ -28,7 +28,7 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
         /// <remarks>
         /// If you are using a none standard port for WebAPI you can override the default.
         /// </remarks>
-        public int ConsolePort { get; set; }
+        public int ConsolePort { get; }
 
         /// <summary>
         /// Gets the API root from which you may call functions for a variety of API functions.

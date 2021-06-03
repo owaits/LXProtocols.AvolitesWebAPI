@@ -21,7 +21,7 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
         /// </summary>
         public AvolitesTitanService()
         {
-            this.titan = new Titan(ConsoleAddress, ConsolePort, HttpsEnabled);
+            
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
         /// <summary>
         /// Gets or sets the console IP address or name to use to connect to the console.
         /// </summary>
-        public string ConsoleAddress { get; set; } = "localhost";
+        public string ConsoleAddress { get; private set; } = "localhost";
 
         /// <summary>
         /// Gets or sets the HTTP port to use when connection to the console, the default is 4430.
@@ -40,12 +40,41 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
         /// <remarks>
         /// If you are using a none standard port for WebAPI you can override the default.
         /// </remarks>
-        public int ConsolePort { get; set; } = 4530;
+        public int ConsolePort { get; private set; } = 4530;
 
         /// <summary>
         /// Gets the API root from which you may call functions for a variety of API functions.
         /// </summary>
-        public Titan API { get { return titan; } }
+        public Titan API 
+        { 
+            get 
+            {
+                if (titan == null)
+                    throw new InvalidOperationException("No connection to Titan has been established. You must call connect with the correct address first.");
+                return titan; 
+            } 
+        }
+
+        /// <summary>
+        /// Makes a connection to the Titan console with the specified address.
+        /// </summary>
+        /// <param name="address">The address of the console to connect to.</param>
+        /// <param name="port">The port to use when connecting.</param>
+        public void Connect(string address, int port)
+        {
+            ConsoleAddress = address;
+            ConsolePort = port;
+
+            this.titan = new Titan(ConsoleAddress, ConsolePort, HttpsEnabled);
+        }
+
+        /// <summary>
+        /// Whether a valid Titan connection exists.
+        /// </summary>
+        public bool IsConnected()
+        {
+            return this.titan != null;
+        }
     }
 
     /// <summary>
