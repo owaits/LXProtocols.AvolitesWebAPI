@@ -34,5 +34,17 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
         /// Gets the API root from which you may call functions for a variety of API functions.
         /// </summary>
         public Titan API { get; }
+
+        /// <summary>
+        /// Makes a connection to the Titan console with the specified address.
+        /// </summary>
+        /// <param name="address">The address of the console to connect to.</param>
+        /// <param name="port">The port to use when connecting.</param>
+        public void Connect(string address, int port);
+
+        /// <summary>
+        /// Whether a valid Titan connection exists.
+        /// </summary>
+        public bool IsConnected();
     }
 }

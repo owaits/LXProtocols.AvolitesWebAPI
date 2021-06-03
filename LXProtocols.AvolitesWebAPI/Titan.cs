@@ -12,7 +12,7 @@ namespace LXProtocols.AvolitesWebAPI
     /// 
     /// Use the console IP address or name, for remote connections use ports 4430 or 4530 and for local connections use ports 4431 and 4531.
     /// </remarks>
-    public class Titan
+    public class Titan:IDisposable
     {
         private HttpClient http = null;
 
@@ -67,5 +67,16 @@ namespace LXProtocols.AvolitesWebAPI
         /// </summary>
         public Fixtures Fixtures { get; private set; }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            if(http != null)
+            {
+                http.Dispose();
+                http = null;
+            }            
+        }
     }
 }

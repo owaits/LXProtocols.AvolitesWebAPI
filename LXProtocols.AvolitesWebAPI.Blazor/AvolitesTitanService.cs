@@ -65,6 +65,11 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
             ConsoleAddress = address;
             ConsolePort = port;
 
+            if(titan != null)
+            {
+                titan.Dispose();
+            }
+
             this.titan = new Titan(ConsoleAddress, ConsolePort, HttpsEnabled);
         }
 
