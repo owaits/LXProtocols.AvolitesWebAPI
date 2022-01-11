@@ -1,6 +1,9 @@
-﻿using System;
+﻿using LXProtocols.AvolitesWebAPI.Information;
+using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
 
 namespace LXProtocols.AvolitesWebAPI
 {
@@ -53,9 +56,24 @@ namespace LXProtocols.AvolitesWebAPI
         {
             string protocol = https ? "https" : "http";
             http = new HttpClient() { BaseAddress = new Uri($"{protocol}://{consoleAddress}:{port}") };
+            Handles = new Handles(http);
             Playbacks = new Playbacks(http);
             Fixtures = new Fixtures(http);
+            Palettes = new Palettes(http);
         }
+
+        /// <summary>
+        /// Gets information about the device we are connected to through WebAPI.
+        /// </summary>
+        /// <remarks>
+        /// If you need to update the device information call IsConnected().
+        /// </remarks>
+        public DeviceInformation ConnectedDevice { get; set; }
+
+        /// <summary>
+        /// Gets all the API functions relating to handles.
+        /// </summary>
+        public Handles Handles { get; private set; }
 
         /// <summary>
         /// Gets all the API functions relating to playbacks.
@@ -63,9 +81,14 @@ namespace LXProtocols.AvolitesWebAPI
         public Playbacks Playbacks { get; private set; }
 
         /// <summary>
-        /// Gets all the API functions relating to fixtures.
+        /// Gets all the API methods relating to fixtures.
         /// </summary>
         public Fixtures Fixtures { get; private set; }
+
+        /// <summary>
+        /// Gets all the API methods relating to palettes.
+        /// </summary>
+        public Palettes Palettes { get; private set; }
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -77,6 +100,29 @@ namespace LXProtocols.AvolitesWebAPI
                 http.Dispose();
                 http = null;
             }            
+        }
+
+        /// <summary>
+        /// Determines if we have a valid WEbAPI connection to a Titan console.
+        /// </summary>
+        /// <returns>True if the connection is valid and we can see a WebAPI endpoint.</returns>
+        public async Task<bool> IsConnected()
+        {
+            try
+            {
+                var response = await http.GetAsync("titan/get/2/Titan/DeviceInfo");
+
+                if(response.IsSuccessStatusCode)
+                {
+                    ConnectedDevice = await response.Content.ReadFromJsonAsync<DeviceInformation>();
+                    return true;
+                }
+                return false;
+            }
+            catch (HttpRequestException)
+            {
+                return false;
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿<div class="btn @(IsActive() ? "btn-primary active" : "btn-outline-primary") h-100">
-    <div class="text-center">@DisplayLegend()</div>
+﻿<div class="btn @(IsActive() ? "btn-primary active" : "btn-outline-primary") h-100 w-100">
+    <div class="titan-fader-title text-center"><small>@DisplayLegend()</small></div>
     <div class="w-100 h-100 pb-5 d-flex justify-content-center">
-        <input class="form-range" type="range" orient="vertical" min="0" max="100" step="1" @bind="Level" />
+        <input class="titan-fader-input form-range" type="range" orient="vertical" min="0" max="100" step="1" @bind="Level" />
     </div>
 </div>
 

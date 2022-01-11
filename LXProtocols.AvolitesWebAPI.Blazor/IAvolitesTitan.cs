@@ -42,9 +42,11 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
         /// <param name="port">The port to use when connecting.</param>
         public void Connect(string address, int port);
 
+        bool IsInitialised();
+
         /// <summary>
         /// Whether a valid Titan connection exists.
         /// </summary>
-        public bool IsConnected();
+        public Task<bool> IsConnected();
     }
 }

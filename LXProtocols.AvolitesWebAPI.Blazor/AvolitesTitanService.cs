@@ -73,12 +73,17 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
             this.titan = new Titan(ConsoleAddress, ConsolePort, HttpsEnabled);
         }
 
+        public bool IsInitialised()
+        {
+            return this.titan != null;
+        }
+
         /// <summary>
         /// Whether a valid Titan connection exists.
         /// </summary>
-        public bool IsConnected()
+        public async Task<bool> IsConnected()
         {
-            return this.titan != null;
+            return this.titan != null && await this.titan.IsConnected();
         }
     }
 
