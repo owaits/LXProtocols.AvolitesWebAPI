@@ -1,0 +1,24 @@
+﻿
+@if(Macros != null)
+{
+    
+    <EditForm Model="this" OnValidSubmit="@SaveMacro">
+        <div class="btn-group mb-1">
+            <button class="btn btn-info" @onclick="NewMacro"><i class="oi oi-document" />&nbsp;New</button>
+            <button type="submit" class="btn btn-info"><i class="oi oi-circle-check"/>&nbsp;Save</button>
+            <button class="btn btn-success" @onclick="SaveAndRunMacro"><i class="oi oi-media-play" />&nbsp;Run</button>
+        </div>
+
+        @if(Editor != null)
+        {
+            <div>
+                @Editor(MacroScript)
+            </div>
+        }
+        else
+        {
+            <InputTextArea class="form-control" @bind-Value="MacroScript" rows="20" />
+        }       
+    </EditForm>
+}
+

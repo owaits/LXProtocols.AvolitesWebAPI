@@ -60,6 +60,7 @@ namespace LXProtocols.AvolitesWebAPI
             Playbacks = new Playbacks(http);
             Fixtures = new Fixtures(http);
             Palettes = new Palettes(http);
+            Macros = new Macros(http);
         }
 
         /// <summary>
@@ -89,6 +90,11 @@ namespace LXProtocols.AvolitesWebAPI
         /// Gets all the API methods relating to palettes.
         /// </summary>
         public Palettes Palettes { get; private set; }
+
+        /// <summary>
+        /// The macros API allows you to download, upload and run macros. 
+        /// </summary>
+        public Macros Macros { get; private set; }
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
