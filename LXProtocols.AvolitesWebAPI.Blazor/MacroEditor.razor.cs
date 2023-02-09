@@ -9,6 +9,8 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
 {
     public partial class MacroEditor
     {
+        private bool newMacroMode = false;
+
         [Inject]
         public IAvolitesTitan Titan { get; set; }
 
@@ -25,15 +27,44 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
                 if(macroId != value)
                 {
                     macroId = value;
-                    InvokeAsync(() => LoadMacro(value));
+
+                    if(!newMacroMode)
+                    {
+                        InvokeAsync(() => LoadMacro(value));
+                    }
+
+                    MacroIdChanged.InvokeAsync(macroId);
                 }
             }
         }
 
         [Parameter]
+        public EventCallback<string> MacroIdChanged { get; set; }
+
+        [Parameter]
         public RenderFragment<string> Editor { get; set; }
 
-        public string MacroScript { get; set; }
+        [Parameter]
+        public Action<string> OnMacroScriptChanged { get; set; }
+
+        public string MacroName { get; set; }
+
+        public string MacroDescription { get; set; }
+
+        private string macroScript = null;
+
+        public string MacroScript 
+        {
+            get { return macroScript; }
+            set
+            {
+                if(macroScript != value)
+                {
+                    macroScript = value;
+
+                }
+            }
+        }
 
         protected override async Task OnInitializedAsync()
         {
@@ -50,6 +81,10 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
         protected async Task LoadMacro(string macroId)
         {
             MacroScript = await Titan.API.Macros.ExportMacro(macroId);
+
+            if (OnMacroScriptChanged != null)
+                OnMacroScriptChanged(MacroScript);
+
             StateHasChanged();
         }
 
@@ -60,7 +95,15 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
 
         protected async Task SaveMacro()
         {
-            await Titan.API.Macros.ImportMacro(MacroScript);
+            if(!string.IsNullOrEmpty(MacroScript))
+            {
+                var script = MacroScript;
+
+                if (!script.Contains("<avolites.macros>"))
+                    script = "<avolites.macros>\r\n" + MacroScript + "</avolites.macros>\r\n";
+
+                await Titan.API.Macros.ImportMacro(script);
+            }            
         }
 
         protected async Task SaveAndRunMacro()
@@ -71,8 +114,23 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
 
         protected async Task NewMacro()
         {
-            await SaveMacro();
-            await Titan.API.Macros.RecallMacro(MacroId);
+            MacroId = string.Empty;
+            newMacroMode = true;
+            StateHasChanged();
+        }
+
+        protected async Task FinishNewMacro()
+        {
+            if(!string.IsNullOrEmpty(MacroId))
+            {
+                MacroScript = $"<avolites.macros>\r\n<macro name=\"{MacroName}\" id=\"{MacroId}\">\r\n    <description>{MacroDescription}</description>\r\n    <sequence>\r\n      <step></step>\r\n    </sequence>\r\n  </macro>\r\n</avolites.macros>";
+                
+                if (OnMacroScriptChanged != null)
+                    OnMacroScriptChanged(MacroScript);
+            }
+
+            newMacroMode = false;
+            StateHasChanged();
         }
     }
 }

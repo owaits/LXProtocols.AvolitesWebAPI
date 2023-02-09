@@ -5,20 +5,48 @@
     <EditForm Model="this" OnValidSubmit="@SaveMacro">
         <div class="btn-group mb-1">
             <button class="btn btn-info" @onclick="NewMacro"><i class="oi oi-document" />&nbsp;New</button>
-            <button type="submit" class="btn btn-info"><i class="oi oi-circle-check"/>&nbsp;Save</button>
-            <button class="btn btn-success" @onclick="SaveAndRunMacro"><i class="oi oi-media-play" />&nbsp;Run</button>
+            <button type="submit" class="btn btn-info" disabled="@(string.IsNullOrEmpty(MacroId))"><i class="oi oi-circle-check"/>&nbsp;Save</button>
+            <button class="btn btn-success" @onclick="SaveAndRunMacro" disabled="@(string.IsNullOrEmpty(MacroId))"><i class="oi oi-media-play" />&nbsp;Run</button>
         </div>
 
-        @if(Editor != null)
+        @if(newMacroMode)
         {
-            <div>
-                @Editor(MacroScript)
-            </div>
+            <div class="alert alert-primary m-2">
+                <h3>Create a new Macro</h3>
+
+                <div class="form-group">
+                    <label>ID:</label>
+                    <InputText class="form-control" @bind-Value="MacroId" />
+                </div>
+
+                <div class="form-group">
+                    <label>Name:</label>
+                    <InputText class="form-control" @bind-Value="MacroName" />
+                </div>
+
+                <div class="form-group">
+                    <label>Description:</label>
+                    <InputText class="form-control" @bind-Value="MacroDescription" />
+                </div>
+
+                <button type="button" class="btn btn-info mt-2" @onclick="FinishNewMacro"><i class="oi oi-document" />&nbsp;Create</button>
+            </div>            
         }
-        else
-        {
-            <InputTextArea class="form-control" @bind-Value="MacroScript" rows="20" />
-        }       
+
+        <div class="@(newMacroMode || string.IsNullOrEmpty(MacroId) ? "collapse" : "")">
+            @if(Editor != null)
+            {
+                   
+                    @Editor(MacroScript)
+                    
+            }
+            else
+            {
+                <InputTextArea class="form-control" @bind-Value="MacroScript" rows="20" />
+            }
+        </div>
+
+    
     </EditForm>
 }
 

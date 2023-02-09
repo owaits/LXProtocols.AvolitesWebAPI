@@ -57,7 +57,9 @@ namespace LXProtocols.AvolitesWebAPI
             string protocol = https ? "https" : "http";
             http = new HttpClient() { BaseAddress = new Uri($"{protocol}://{consoleAddress}:{port}") };
             Handles = new Handles(http);
+            Menu = new Menu(http);
             Playbacks = new Playbacks(http);
+            CueLists = new CueLists(http);
             Fixtures = new Fixtures(http);
             Palettes = new Palettes(http);
             Macros = new Macros(http);
@@ -77,9 +79,16 @@ namespace LXProtocols.AvolitesWebAPI
         public Handles Handles { get; private set; }
 
         /// <summary>
+        /// The menu API controls much of the behaviour of the console, use this to control it.
+        /// </summary>
+        public Menu Menu { get; set; }
+
+        /// <summary>
         /// Gets all the API functions relating to playbacks.
         /// </summary>
         public Playbacks Playbacks { get; private set; }
+
+        public CueLists CueLists { get; private set; }
 
         /// <summary>
         /// Gets all the API methods relating to fixtures.
