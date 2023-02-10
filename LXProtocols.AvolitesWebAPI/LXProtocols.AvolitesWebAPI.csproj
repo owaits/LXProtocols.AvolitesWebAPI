@@ -8,5 +8,6 @@
     <RepositoryUrl>https://github.com/owaits/LXProtocols.AvolitesWebAPI</RepositoryUrl>
     <PackageTags>lighting, console, control, remote, titan, webapi</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>1.0.1-alpha4</Version>
   </PropertyGroup>
 </Project>
