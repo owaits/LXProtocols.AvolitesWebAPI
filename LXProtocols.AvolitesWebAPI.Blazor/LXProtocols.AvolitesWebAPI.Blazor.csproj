@@ -8,7 +8,6 @@
     <PackageTags>lighting, console, control, remote, titan, webapi, blazor</PackageTags>
     <Description>This is a component library for blazor that simplifies writing blazor applications to control Avolites Titan lighting consoles through WebAPI. A number of UI components are included to help writing control interfaces for Avolites Titan. The library simplifies firing playbacks and setting levels by providing simple Playback button and fader controls.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0.1-alpha5</Version>
   </PropertyGroup>
 
   <ItemGroup>
