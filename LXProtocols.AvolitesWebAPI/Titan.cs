@@ -63,6 +63,7 @@ namespace LXProtocols.AvolitesWebAPI
             Fixtures = new Fixtures(http);
             Palettes = new Palettes(http);
             Macros = new Macros(http);
+            Dmx = new Dmx(http);
         }
 
         /// <summary>
@@ -104,6 +105,12 @@ namespace LXProtocols.AvolitesWebAPI
         /// The macros API allows you to download, upload and run macros. 
         /// </summary>
         public Macros Macros { get; private set; }
+
+
+        /// <summary>
+        /// The DMX API allowing you to control the DMX output.
+        /// </summary>
+        public Dmx Dmx { get; private set; }
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
