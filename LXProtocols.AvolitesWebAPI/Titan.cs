@@ -64,6 +64,7 @@ namespace LXProtocols.AvolitesWebAPI
             Palettes = new Palettes(http);
             Macros = new Macros(http);
             Dmx = new Dmx(http);
+            SetList = new SetList(http);
         }
 
         /// <summary>
@@ -111,6 +112,11 @@ namespace LXProtocols.AvolitesWebAPI
         /// The DMX API allowing you to control the DMX output.
         /// </summary>
         public Dmx Dmx { get; private set; }
+
+        /// <summary>
+        /// The Set List API allowing you to control and modify a set list..
+        /// </summary>
+        public SetList SetList { get; private set; }
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
