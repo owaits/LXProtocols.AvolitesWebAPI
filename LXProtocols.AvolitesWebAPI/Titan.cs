@@ -17,13 +17,29 @@ namespace LXProtocols.AvolitesWebAPI
     /// </remarks>
     public class Titan:IDisposable
     {
+        /// <summary>
+        /// This is the normal WebAPI port, it uses a seperate panel and changes are not reflected withing the console panel. 
+        /// </summary>
+        /// <remarks>
+        /// Instructions are carried out a seperate user and so selecting fixtures will not appear in the console panel.
+        /// </remarks>
+        public const int NormalPort = 4430;
+
+        /// <summary>
+        /// This WebAPI allows direct control of the console panel without seperation.
+        /// </summary>
+        /// <remarks>
+        /// If you where to select fixtures the selection is represented within the console panel.
+        /// </remarks>
+        public const int InteractivePort = 4431;
+
         private HttpClient http = null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Titan"/> class.
         /// </summary>
         /// <param name="consoleAddress">The console IP address used to connect to WebAPI.</param>
-        public Titan(IPAddress consoleAddress) : this(consoleAddress.ToString(), 4430)
+        public Titan(IPAddress consoleAddress) : this(consoleAddress.ToString(), NormalPort)
         {
         }
 
@@ -42,7 +58,7 @@ namespace LXProtocols.AvolitesWebAPI
         /// Initializes a new instance of the <see cref="Titan"/> class.
         /// </summary>
         /// <param name="consoleAddress">The console IP address or name used to connect to WebAPI.</param>
-        public Titan(string consoleAddress):this(consoleAddress, 4531)
+        public Titan(string consoleAddress):this(consoleAddress, NormalPort)
         {
         }
 
@@ -63,6 +79,8 @@ namespace LXProtocols.AvolitesWebAPI
             Fixtures = new Fixtures(http);
             Palettes = new Palettes(http);
             Macros = new Macros(http);
+            Programmer = new Programmer(http);
+            Selection = new Selection(http);
         }
 
         /// <summary>
@@ -104,6 +122,19 @@ namespace LXProtocols.AvolitesWebAPI
         /// The macros API allows you to download, upload and run macros. 
         /// </summary>
         public Macros Macros { get; private set; }
+
+        /// <summary>
+        /// The programmer API to allow editing and updating fixture values within the programmer.
+        /// </summary>
+        /// <remarks>
+        /// Use the programmer as a storage space to place fixture changes that will be recorded in cues.
+        /// </remarks>
+        public Programmer Programmer { get; private set; }
+
+        /// <summary>
+        /// The selection API to allow selection of fixtures which can then be use to place levels in the programmer.
+        /// </summary>
+        public Selection Selection { get; set; }
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.

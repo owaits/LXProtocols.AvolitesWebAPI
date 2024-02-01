@@ -33,5 +33,10 @@ namespace LXProtocols.AvolitesWebAPI.Information
         {
             return $"{argumentName}_titanId={Id}";
         }
+
+        public static string ToQueryArgument(IEnumerable<TitanId> handles, string argumentName)
+        {
+            return $"{argumentName}_titanIdList={string.Join(",", handles.Select(h => h.Id))}";
+        }
     }
 }

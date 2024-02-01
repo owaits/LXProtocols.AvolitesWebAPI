@@ -1,0 +1,29 @@
+﻿button {
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+button:hover {
+    font: #000000;
+    border: 4px solid #00A6FF;
+}
+
+button.active {
+    font: #000000;
+    color: #ffffff;
+    background-color: darkgreen;
+    text-decoration: none;
+    border: 4px solid #00A6FF;
+}
+
+button.empty {
+    color: #ffffff;
+    text-decoration: none;
+    border: 2px solid #ffffff;
+}

@@ -33,6 +33,16 @@ namespace LXProtocols.AvolitesWebAPI
         }
 
         /// <summary>
+        /// Creates a list handle reference from a list of titan ID.
+        /// </summary>
+        /// <param name="titanId">The list of titan IDs to create the handle references from.</param>
+        /// <returns>A list of handle references to return.</returns>
+        public static IEnumerable<HandleReference> FromTitanIds(IEnumerable<int> titanId)
+        {
+            return titanId.Select(id => new TitanId(id));
+        }
+
+        /// <summary>
         /// Creates a handle reference from a user number.
         /// </summary>
         /// <param name="userNumber">The user number to create the handle reference from.</param>
@@ -40,6 +50,16 @@ namespace LXProtocols.AvolitesWebAPI
         public static HandleReference FromUserNumber(double userNumber)
         {
             return new UserNumber(userNumber);
+        }
+
+        /// <summary>
+        /// Creates a list handle reference from a list of user numbers.
+        /// </summary>
+        /// <param name="titanId">The list of user numbers to create the handle references from.</param>
+        /// <returns>A list of handle references to return.</returns>
+        public static IEnumerable<HandleReference> FromUserNumbers(IEnumerable<double> userNumber)
+        {
+            return userNumber.Select(u=> new UserNumber(u));
         }
 
         /// <summary>
@@ -54,6 +74,31 @@ namespace LXProtocols.AvolitesWebAPI
                 return FromTitanId(titanId);
             else
                 return FromUserNumber(userNumber);
+        }
+    }
+
+    /// <summary>
+    /// Extension methods useful for dealing with handle references.
+    /// </summary>
+    public static class HandleReferenceExtensions
+    {
+        /// <summary>
+        /// Formats a list of handles into a suitable format for use within a url request.
+        /// </summary>
+        /// <param name="handles">The handles to add to the query.</param>
+        /// <param name="argumentName">Name of the argument to place in the query..</param>
+        /// <returns>The query argument.</returns>
+        public static string ToQueryArgument(this IEnumerable<HandleReference> handles, string argumentName)
+        {
+            var userNumbers = handles.OfType<UserNumber>();
+            if(userNumbers.Any())
+                return UserNumber.ToQueryArgument(userNumbers, argumentName);
+
+            var titanIds = handles.OfType<TitanId>();
+            if (titanIds.Any())
+                return TitanId.ToQueryArgument(titanIds, argumentName);
+
+            return string.Empty;
         }
     }
 }

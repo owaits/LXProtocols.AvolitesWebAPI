@@ -33,5 +33,10 @@ namespace LXProtocols.AvolitesWebAPI.Information
         {
             return $"{argumentName}_userNumber={Number}";
         }
+
+        public static string ToQueryArgument(IEnumerable<UserNumber> handles,string argumentName)
+        {
+            return $"{argumentName}_userNumberList={string.Join(",",handles.Select(h=> h.Number))}";
+        }
     }
 }
