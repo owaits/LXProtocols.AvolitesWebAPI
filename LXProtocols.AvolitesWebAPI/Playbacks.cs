@@ -7,6 +7,7 @@ using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace LXProtocols.AvolitesWebAPI
 {
@@ -70,6 +71,17 @@ namespace LXProtocols.AvolitesWebAPI
         public async Task KillAll()
         {
             await http.GetAsync($"titan/script/2/Playbacks/KillAllPlaybacks");
+        }
+
+        /// <summary>
+        /// Records a single cue on a playback. The new cue is created using the information in the programmer and the current record mode.
+        /// </summary>
+        /// <param name="group">The handle group the new cue is to be recorded on.</param>
+        /// <param name="index">The handle ID in the group the cue is to be recorded on.</param>
+        /// <param name="updateOnly">if set to true [update only].</param>
+        public async Task StoreCue(string group, int index, bool updateOnly = false)
+        {
+            await http.GetAsync($"titan/script/2/Playbacks/StoreCue?group={group}&index={index}&updateOnly={updateOnly}");
         }
     }
 }
