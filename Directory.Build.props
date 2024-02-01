@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>    
-    <Version>1.0.1-alpha3</Version>
+    <Version>1.0.1-alpha7</Version>
     <Authors>Oliver Waits</Authors>
     <Company>Oliver Waits</Company>
-    <Copyright>Copyright © Oliver Waits 2021</Copyright>
+    <Copyright>Copyright © Oliver Waits 2022</Copyright>
   </PropertyGroup>
 </Project>

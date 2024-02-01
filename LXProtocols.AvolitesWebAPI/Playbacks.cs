@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LXProtocols.AvolitesWebAPI.Information;
+using LXProtocols.AvolitesWebAPI.JsonConverters;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -22,6 +24,16 @@ namespace LXProtocols.AvolitesWebAPI
         internal Playbacks(HttpClient http)
         {
             this.http = http;
+        }
+
+        /// <summary>
+        /// Gets the playback information given the titan ID for the playback.
+        /// </summary>
+        /// <param name="playbackId">The playback ID of the cue list containing the cue.</param>
+        /// <returns>The playback information for the specified playback.</returns>
+        public async Task<PlaybackInformation> GetPlayback(int playbackId)
+        {
+            return (await http.GetFromJsonAsync<JsonInformation<PlaybackInformation>>($"titan/playback/{playbackId}")).Information;
         }
 
         /// <summary>

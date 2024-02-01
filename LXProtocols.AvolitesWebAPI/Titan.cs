@@ -79,6 +79,8 @@ namespace LXProtocols.AvolitesWebAPI
             Fixtures = new Fixtures(http);
             Palettes = new Palettes(http);
             Macros = new Macros(http);
+            Dmx = new Dmx(http);
+            SetList = new SetList(http);
             Programmer = new Programmer(http);
             Selection = new Selection(http);
         }
@@ -122,6 +124,17 @@ namespace LXProtocols.AvolitesWebAPI
         /// The macros API allows you to download, upload and run macros. 
         /// </summary>
         public Macros Macros { get; private set; }
+
+
+        /// <summary>
+        /// The DMX API allowing you to control the DMX output.
+        /// </summary>
+        public Dmx Dmx { get; private set; }
+
+        /// <summary>
+        /// The Set List API allowing you to control and modify a set list..
+        /// </summary>
+        public SetList SetList { get; private set; }
 
         /// <summary>
         /// The programmer API to allow editing and updating fixture values within the programmer.

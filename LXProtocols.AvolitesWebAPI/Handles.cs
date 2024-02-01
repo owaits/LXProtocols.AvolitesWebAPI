@@ -22,22 +22,22 @@ namespace LXProtocols.AvolitesWebAPI
 
         #region Handles
 
-        public async Task<HandleInformation[]> GetHandles(string handleGroupId = "", int pageIndex = -1)
+        public async Task<HandleInformation[]> GetHandles(string handleGroupId = "", int pageIndex = -1, bool verbose = false)
         {
             if(!string.IsNullOrEmpty(handleGroupId))
             {
                 if(pageIndex > 0)
                 {
-                    return await http.GetFromJsonAsync<HandleInformation[]>($"titan/handles/{handleGroupId}");
+                    return await http.GetFromJsonAsync<HandleInformation[]>($"titan/handles/{handleGroupId}{(verbose? "?verbose=true":"")}");
                 }
                 else
                 {
-                    return await http.GetFromJsonAsync<HandleInformation[]>($"titan/handles/{handleGroupId}/{pageIndex}");
+                    return await http.GetFromJsonAsync<HandleInformation[]>($"titan/handles/{handleGroupId}/{pageIndex}{(verbose ? "?verbose=true" : "")}");
                 }
             }
             else
             {
-                return await http.GetFromJsonAsync<HandleInformation[]>($"titan/handles");
+                return await http.GetFromJsonAsync<HandleInformation[]>($"titan/handles{(verbose ? "?verbose=true" : "")}");
             }            
         }
 
