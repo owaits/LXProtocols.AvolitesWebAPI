@@ -31,6 +31,12 @@ namespace LXProtocols.AvolitesWebAPI.JsonConverters
         {
             int major = 0, minor = 0, build = 0, revision = 0;
 
+            var versionAsString = reader.GetString();
+
+            //Decode the simple version format.
+            if(Version.TryParse(versionAsString, out Version version))
+                return version;
+
             while(reader.Read())
             {
                 if (reader.TokenType != JsonTokenType.PropertyName && reader.TokenType != JsonTokenType.StartObject)
