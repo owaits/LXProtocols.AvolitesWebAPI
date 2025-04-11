@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Provides and implentation of the Avolites Titan WebAPI protocol. Use this library to connect to an Avolites Lighting console and control many functions available withing the lighting desk. This library includes many fiunctions to fire cues and interact with fixtures.</Description>
     <PackageProjectUrl>https://github.com/owaits/LXProtocols.AvolitesWebAPI</PackageProjectUrl>

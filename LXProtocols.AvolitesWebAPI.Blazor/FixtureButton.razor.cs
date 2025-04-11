@@ -56,6 +56,11 @@ namespace LXProtocols.AvolitesWebAPI.Blazor
 
         public bool Selected { get; set; }
 
+        public bool IsActive()
+        {
+            return FixtureHandle?.Active == true;
+        }
+
         public bool IsSelected()
         {
             return FixtureHandle?.Selected == true;
